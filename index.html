@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Modernity - Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen" class="screen active">
+            <div class="welcome-content">
+                <h1>What is Modernity?</h1>
+                <p>Test your knowledge with 106 questions from the course</p>
+                <div class="quiz-info">
+                    <p>📚 <strong>106 Questions</strong> • Multiple Choice, True/False, Fill in the Blanks</p>
+                    <p>⏱️ <strong>Timer</strong> • Track how long you spend on the quiz</p>
+                    <p>💡 <strong>Hints</strong> • Eliminate options to help you decide</p>
+                    <p>⏭️ <strong>Skip</strong> • Come back to tough questions later</p>
+                    <p>🧠 <strong>Memory Techniques</strong> • Learn from your wrong answers</p>
+                </div>
+                <button id="startBtn" class="btn btn-primary">Start Quiz</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="screen">
+            <div class="quiz-header">
+                <div class="progress">
+                    <span id="currentQuestion">1</span> / <span id="totalQuestions">106</span>
+                </div>
+                <div class="timer-display">
+                    <span id="timerValue">00:00:00</span>
+                    <button id="pausePlayBtn" class="btn btn-small">⏸ Pause</button>
+                </div>
+                <div class="score-display">
+                    ✓ <span id="answered">0</span> answered
+                </div>
+            </div>
+
+            <div class="quiz-content">
+                <div class="question-container">
+                    <h2 id="questionText"></h2>
+                    <div id="optionsContainer"></div>
+                    <div id="fillBlankContainer"></div>
+                </div>
+
+                <div class="quiz-actions">
+                    <button id="hintBtn" class="btn btn-secondary">💡 Hint</button>
+                    <button id="skipBtn" class="btn btn-secondary">⏭️ Skip</button>
+                    <button id="submitBtn" class="btn btn-primary" style="display:none;">Submit Answer</button>
+                    <button id="nextBtn" class="btn btn-primary">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="screen">
+            <div class="results-content">
+                <h1>Quiz Complete! 🎉</h1>
+                <div class="results-summary">
+                    <div class="result-stat">
+                        <span class="stat-value" id="finalScore">0</span>
+                        <span class="stat-label">Correct</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="stat-value" id="finalWrong">0</span>
+                        <span class="stat-label">Incorrect</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="stat-value" id="finalSkipped">0</span>
+                        <span class="stat-label">Skipped</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="stat-value" id="finalTime">00:00:00</span>
+                        <span class="stat-label">Time Spent</span>
+                    </div>
+                </div>
+                <div class="percentage-display">
+                    <div class="percentage-circle">
+                        <span id="percentageValue">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-techniques">
+                <h2>📚 Memory Techniques for Wrong Answers</h2>
+                <div id="wrongAnswersContainer"></div>
+            </div>
+
+            <div class="results-actions">
+                <button id="retakeBtn" class="btn btn-primary">Retake Quiz</button>
+                <button id="reviewBtn" class="btn btn-secondary">Review Answers</button>
+            </div>
+        </div>
+
+        <!-- Review Screen -->
+        <div id="reviewScreen" class="screen">
+            <div class="review-header">
+                <h1>Review Your Answers</h1>
+                <button id="backToResultsBtn" class="btn btn-secondary">← Back to Results</button>
+            </div>
+            <div id="reviewContainer"></div>
+        </div>
+    </div>
+
+    <script src="quiz-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
