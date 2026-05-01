@@ -106,6 +106,8 @@ class QuizApp {
         question.options.forEach((option, index) => {
             const div = document.createElement('div');
             div.className = 'option';
+            div.style.cursor = 'pointer';  // Make cursor indicate it's clickable
+            
             if (this.answers[this.currentIndex] === index) {
                 div.classList.add('selected');
             }
@@ -122,12 +124,13 @@ class QuizApp {
             div.appendChild(input);
             div.appendChild(label);
             
-            // Make entire option div clickable
+            // Make entire option div clickable - improved version
             div.addEventListener('click', (e) => {
-                if (e.target !== input) {
-                    input.checked = true;
-                    this.selectAnswer(index);
-                }
+                e.preventDefault();
+                e.stopPropagation();
+                input.checked = true;
+                // Trigger change event manually to ensure selectAnswer is called
+                input.dispatchEvent(new Event('change', { bubbles: true }));
             });
             
             container.appendChild(div);
