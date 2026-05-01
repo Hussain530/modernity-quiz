@@ -83,7 +83,7 @@ class QuizApp {
         const question = this.questions[this.currentIndex];
         document.getElementById('currentQuestion').textContent = this.currentIndex + 1;
         document.getElementById('totalQuestions').textContent = this.questions.length;
-        document.getElementById('answered').textContent = Object.keys(this.answers).length;
+        this.updateAnsweredCount();
 
         document.getElementById('questionText').textContent = question.question;
         document.getElementById('optionsContainer').innerHTML = '';
@@ -144,11 +144,24 @@ class QuizApp {
 
     selectAnswer(answer) {
         this.answers[this.currentIndex] = answer;
+        this.updateAnsweredCount();
+    }
+
+    updateAnsweredCount() {
+        let correctCount = 0;
+        for (const index in this.answers) {
+            const question = this.questions[index];
+            if (this.checkAnswer(question, this.answers[index])) {
+                correctCount++;
+            }
+        }
+        document.getElementById('answered').textContent = correctCount;
     }
 
     submitFillBlank() {
         const input = document.querySelector('.fill-blank-input');
         if (input.value.trim()) {
+            this.updateAnsweredCount();
             this.nextQuestion();
         } else {
             alert('Please enter an answer');
