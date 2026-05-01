@@ -121,6 +121,15 @@ class QuizApp {
 
             div.appendChild(input);
             div.appendChild(label);
+            
+            // Make entire option div clickable
+            div.addEventListener('click', (e) => {
+                if (e.target !== input) {
+                    input.checked = true;
+                    this.selectAnswer(index);
+                }
+            });
+            
             container.appendChild(div);
         });
     }
