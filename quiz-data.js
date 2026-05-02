@@ -445,7 +445,7 @@ const quizData = [
         id: 59,
         type: 'fillblank',
         question: 'In contrasting pre-British governance with British administration, Mike Davis uses the expression \'laws of __________ versus laws __________\'.',
-        correct: 'leather versus of iron',
+        correct: 'leather versus iron',
         hint: 'Harsh versus harsh, but different kinds'
     },
     {
