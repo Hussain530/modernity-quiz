@@ -83,7 +83,6 @@ class QuizApp {
         const question = this.questions[this.currentIndex];
         document.getElementById('currentQuestion').textContent = this.currentIndex + 1;
         document.getElementById('totalQuestions').textContent = this.questions.length;
-        this.updateAnsweredCount();
 
         document.getElementById('questionText').textContent = question.question;
         document.getElementById('optionsContainer').innerHTML = '';
@@ -156,7 +155,7 @@ class QuizApp {
 
     selectAnswer(answer) {
         this.answers[this.currentIndex] = answer;
-        this.updateAnsweredCount();
+        // Don't update counter here - wait until Next is clicked
     }
 
     updateAnsweredCount() {
@@ -173,7 +172,6 @@ class QuizApp {
     submitFillBlank() {
         const input = document.querySelector('.fill-blank-input');
         if (input.value.trim()) {
-            this.updateAnsweredCount();
             this.nextQuestion();
         } else {
             alert('Please enter an answer');
@@ -189,6 +187,9 @@ class QuizApp {
         if (this.skipped.has(this.currentIndex) && this.answers[this.currentIndex] !== undefined) {
             this.skipped.delete(this.currentIndex);
         }
+
+        // Update counter after moving to next question
+        this.updateAnsweredCount();
 
         this.currentIndex++;
         if (this.currentIndex < this.questions.length) {
