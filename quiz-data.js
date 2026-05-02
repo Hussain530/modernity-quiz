@@ -59,7 +59,7 @@ const quizData = [
         type: 'mcq',
         question: 'Before colonialism the term Islam was:',
         options: ['A proper name rather than a verbal noun', 'A verbal noun rather than a proper name', 'Used as a name for the civilization of Muslims', 'Treated with admiration in some parts of Europe'],
-        correct: 0,
+        correct: 1,
         hint: 'Colonialism changed how we categorize religions'
     },
     {
@@ -445,7 +445,7 @@ const quizData = [
         id: 59,
         type: 'fillblank',
         question: 'In contrasting pre-British governance with British administration, Mike Davis uses the expression \'laws of __________ versus laws __________\'.',
-        correct: 'leather versus laws iron',
+        correct: 'leather versus of iron',
         hint: 'Harsh versus harsh, but different kinds'
     },
     {
