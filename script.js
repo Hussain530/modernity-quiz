@@ -92,12 +92,36 @@ class QuizApp {
         document.getElementById('submitBtn').style.display = 'none';
 
         if (question.type === 'mcq') {
+            this.shuffleOptions(question);
             this.showMCQOptions(question);
         } else if (question.type === 'tf') {
             this.showTFOptions(question);
         } else if (question.type === 'fillblank') {
             this.showFillBlank(question);
         }
+    }
+
+    shuffleOptions(question) {
+        // Only shuffle MCQ options, and only once per question
+        if (question.type !== 'mcq' || question._shuffled) return;
+        
+        // Store the original correct answer text
+        const correctOptionText = question.options[question.correct];
+        
+        // Create a copy and shuffle it
+        const shuffled = [...question.options];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        
+        // Find the new index of the correct answer
+        const newCorrectIndex = shuffled.indexOf(correctOptionText);
+        
+        // Update the question with shuffled options and new correct index
+        question.options = shuffled;
+        question.correct = newCorrectIndex;
+        question._shuffled = true;
     }
 
     showMCQOptions(question) {
