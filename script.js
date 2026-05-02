@@ -263,11 +263,44 @@ class QuizApp {
         };
     }
 
+    // Calculate Levenshtein distance for fuzzy matching
+    levenshteinDistance(str1, str2) {
+        const len1 = str1.length;
+        const len2 = str2.length;
+        const matrix = Array(len2 + 1).fill(null).map(() => Array(len1 + 1).fill(0));
+
+        for (let i = 0; i <= len1; i++) matrix[0][i] = i;
+        for (let j = 0; j <= len2; j++) matrix[j][0] = j;
+
+        for (let j = 1; j <= len2; j++) {
+            for (let i = 1; i <= len1; i++) {
+                const cost = str1[i - 1] === str2[j - 1] ? 0 : 1;
+                matrix[j][i] = Math.min(
+                    matrix[j][i - 1] + 1,
+                    matrix[j - 1][i] + 1,
+                    matrix[j - 1][i - 1] + cost
+                );
+            }
+        }
+        return matrix[len2][len1];
+    }
+
+    // Check if answers match (with fuzzy matching for fill-blanks)
     checkAnswer(question, userAnswer) {
         if (userAnswer === undefined) return false;
 
         if (question.type === 'fillblank') {
-            return userAnswer.toLowerCase().trim() === question.correct.toLowerCase().trim();
+            const userLower = userAnswer.toLowerCase().trim();
+            const correctLower = question.correct.toLowerCase().trim();
+            
+            // Exact match
+            if (userLower === correctLower) return true;
+            
+            // Fuzzy match: allow spelling mistakes up to 25% of the correct answer length
+            const distance = this.levenshteinDistance(userLower, correctLower);
+            const maxDistance = Math.max(2, Math.floor(correctLower.length * 0.25)); // Allow up to 25% difference
+            
+            return distance <= maxDistance;
         } else {
             return parseInt(userAnswer) === question.correct;
         }
