@@ -337,7 +337,7 @@ const quizData = [
         type: 'tf',
         question: 'David Olusoga discusses a painting set in 16th century Lisbon in which all the Africans are slaves.',
         options: ['True', 'False'],
-        correct: 0, // True
+        correct: 1, // False
         hint: 'Slavery in early colonial Europe'
     },
     {
